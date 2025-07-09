@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>수지 & 현동의 결혼식 초대장</title>
+  <title>결혼식 초대장</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -622,10 +622,6 @@
       </div>
     </div>
 
-    <audio id="bgMusic" loop>
-      <source src="변진섭 - 숙녀에게   가사 (Lyrics).mp3" type="audio/mpeg">
-    </audio>
-
     <div class="card-indicator">
       <div class="indicator-dot active"></div>
       <div class="indicator-dot"></div>
@@ -741,39 +737,31 @@
   </div>
 
   <script>
-    const bgMusic = document.getElementById('bgMusic');
+    const GUESTBOOK_STORAGE_KEY = 'wedding_guestbook';
+
+    function getGuestbookEntries() {
+      const data = localStorage.getItem(GUESTBOOK_STORAGE_KEY);
+      return data ? JSON.parse(data) : [];
+    }
+
+    function saveGuestbookEntries(entries) {
+      localStorage.setItem(GUESTBOOK_STORAGE_KEY, JSON.stringify(entries));
+    }
+
     const musicPlayer = document.getElementById('musicPlayer');
     let isPlaying = false;
 
     function toggleMusic() {
       if (isPlaying) {
-        bgMusic.pause();
         musicPlayer.classList.remove('playing');
         isPlaying = false;
       } else {
-        bgMusic.play().catch(e => console.log('음악 재생 실패:', e));
         musicPlayer.classList.add('playing');
         isPlaying = true;
       }
     }
 
-    function startMusic() {
-      bgMusic.play().catch(e => {
-        console.log('자동재생 실패:', e);
-      });
-      musicPlayer.classList.add('playing');
-      isPlaying = true;
-    }
-
     musicPlayer.addEventListener('click', toggleMusic);
-
-    document.addEventListener('click', () => {
-      if (!isPlaying) {
-        startMusic();
-      }
-    }, { once: true });
-
-    setTimeout(startMusic, 1000);
 
     const cards = document.querySelectorAll('.card');
     const indicators = document.querySelectorAll('.indicator-dot');
@@ -846,8 +834,6 @@
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     document.getElementById('dday').textContent = diffDays > 0 ? `D-${diffDays}` : '오늘입니다!';
 
-    let guestbookEntries = [];
-
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
@@ -875,21 +861,28 @@
     guestbookForm.addEventListener('submit', (e) => {
       e.preventDefault();
       
-      const name = document.getElementById('guestName').value;
+      const name = document.getElementById('guestName').value.trim();
       const status = document.getElementById('guestStatus').value;
-      const message = document.getElementById('guestMessage').value;
+      const message = document.getElementById('guestMessage').value.trim();
       const password = document.getElementById('guestPassword').value;
       
-      const entry = {
+      if (!name || !status || !message || !password) {
+        alert('모든 항목을 입력해주세요.');
+        return;
+      }
+      
+      const entries = getGuestbookEntries();
+      const newEntry = {
         id: Date.now(),
         name,
         status,
         message,
         password,
-        date: new Date()
+        date: new Date().toISOString()
       };
       
-      guestbookEntries.unshift(entry);
+      entries.unshift(newEntry);
+      saveGuestbookEntries(entries);
       
       alert("소중한 마음이 전달되었습니다! 감사합니다 💕");
       guestbookForm.reset();
@@ -903,8 +896,9 @@
 
     function displayGuestbookEntries() {
       const listContainer = document.getElementById('guestbookList');
+      const entries = getGuestbookEntries();
       
-      if (guestbookEntries.length === 0) {
+      if (entries.length === 0) {
         listContainer.innerHTML = `
           <div class="no-messages">
             아직 작성된 메시지가 없습니다.<br>
@@ -914,7 +908,7 @@
         return;
       }
       
-      listContainer.innerHTML = guestbookEntries.map(entry => {
+      listContainer.innerHTML = entries.map(entry => {
         const statusClass = entry.status === '참석' ? 'attend' : 
                            entry.status === '불참' ? 'absent' : 'maybe';
         
@@ -924,7 +918,7 @@
               <div class="guestbook-name">${entry.name}</div>
               <div>
                 <span class="guestbook-status ${statusClass}">${entry.status}</span>
-                <div class="guestbook-date">${formatDate(entry.date)}</div>
+                <div class="guestbook-date">${formatDate(new Date(entry.date))}</div>
               </div>
             </div>
             <div class="guestbook-message">${entry.message.replace(/\n/g, '<br>')}</div>
@@ -946,21 +940,23 @@
         return;
       }
       
-      const entry = guestbookEntries.find(e => e.id === entryId);
+      const entries = getGuestbookEntries();
+      const entryIndex = entries.findIndex(e => e.id === entryId);
       
-      if (!entry) {
+      if (entryIndex === -1) {
         alert('메시지를 찾을 수 없습니다.');
         return;
       }
       
-      if (entry.password !== enteredPassword) {
+      if (entries[entryIndex].password !== enteredPassword) {
         alert('비밀번호가 일치하지 않습니다.');
         passwordInput.value = '';
         return;
       }
       
       if (confirm('정말로 이 메시지를 삭제하시겠습니까?')) {
-        guestbookEntries = guestbookEntries.filter(e => e.id !== entryId);
+        entries.splice(entryIndex, 1);
+        saveGuestbookEntries(entries);
         displayGuestbookEntries();
         alert('메시지가 삭제되었습니다.');
       }
@@ -984,36 +980,43 @@
       });
     }
 
+    function addSampleGuestbookData() {
+      const entries = getGuestbookEntries();
+      if (entries.length === 0) {
+        const sampleData = [
+          {
+            id: 1,
+            name: "김친구",
+            status: "참석",
+            message: "정말 축하해 💕 너희들의 행복한 모습 보니까 나도 덩달아 기뻐진다. 결혼식 당일에 만나자!",
+            password: "1234",
+            date: new Date(Date.now() - 3600000).toISOString()
+          },
+          {
+            id: 2,
+            name: "이동생",
+            status: "참석",
+            message: "언니 오빠! 드디어 결혼하시는군요! 😍 오랫동안 행복하세요~",
+            password: "1234",
+            date: new Date(Date.now() - 7200000).toISOString()
+          },
+          {
+            id: 3,
+            name: "박선배",
+            status: "불참",
+            message: "축하드립니다! 아쉽게도 참석하지 못하지만 마음만은 함께하겠습니다. 새로운 시작을 진심으로 축복합니다! 🎉",
+            password: "1234",
+            date: new Date(Date.now() - 86400000).toISOString()
+          }
+        ];
+        saveGuestbookEntries(sampleData);
+      }
+    }
+
+    window.deleteEntry = deleteEntry;
+
     updateCards();
-    
-    setTimeout(() => {
-      guestbookEntries.push(
-        {
-          id: 1,
-          name: "김친구",
-          status: "참석",
-          message: "정말 축하해 💕 너희들의 행복한 모습 보니까 나도 덩달아 기뻐진다. 결혼식 당일에 만나자!",
-          password: "1234",
-          date: new Date(Date.now() - 3600000)
-        },
-        {
-          id: 2,
-          name: "이동생",
-          status: "참석",
-          message: "언니 오빠! 드디어 결혼하시는군요! 😍 오랫동안 행복하세요~",
-          password: "1234",
-          date: new Date(Date.now() - 7200000)
-        },
-        {
-          id: 3,
-          name: "박선배",
-          status: "불참",
-          message: "축하드립니다! 아쉽게도 참석하지 못하지만 마음만은 함께하겠습니다. 새로운 시작을 진심으로 축복합니다! 🎉",
-          password: "1234",
-          date: new Date(Date.now() - 86400000)
-        }
-      );
-    }, 1000);
+    addSampleGuestbookData();
   </script>
 </body>
 </html>

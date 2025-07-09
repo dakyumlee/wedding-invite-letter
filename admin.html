@@ -154,6 +154,58 @@
       font-weight: 500;
     }
 
+    .add-rsvp-section {
+      background: #f8f8f8;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .add-rsvp-title {
+      color: #4a4a4a;
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .add-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .add-form input, .add-form select, .add-form textarea {
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 14px;
+    }
+
+    .add-form textarea {
+      grid-column: 1 / -1;
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .add-btn {
+      background: #666;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Noto Serif KR', serif;
+    }
+
+    .add-btn:hover {
+      background: #555;
+      transform: translateY(-1px);
+    }
+
     .rsvp-list {
       background: #f8f8f8;
       border-radius: 15px;
@@ -226,6 +278,12 @@
       line-height: 1.6;
     }
 
+    .rsvp-date {
+      color: #999;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
     .delete-btn {
       background: #ff6b6b;
       color: white;
@@ -255,6 +313,30 @@
       opacity: 0.5;
     }
 
+    .actions {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .action-btn {
+      background: #f0f0f0;
+      color: #666;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+      font-family: 'Noto Serif KR', serif;
+    }
+
+    .action-btn:hover {
+      background: #e0e0e0;
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 0 10px;
@@ -267,6 +349,10 @@
       .stats-grid {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 15px;
+      }
+
+      .add-form {
+        grid-template-columns: 1fr;
       }
 
       .rsvp-header {
@@ -333,22 +419,46 @@
         </div>
       </div>
 
+      <div class="add-rsvp-section">
+        <h3 class="add-rsvp-title">➕ 새 응답 추가</h3>
+        <div class="add-form">
+          <input type="text" id="newName" placeholder="이름">
+          <select id="newStatus">
+            <option value="참석">참석</option>
+            <option value="불참">불참</option>
+            <option value="미정">미정</option>
+          </select>
+          <textarea id="newMessage" placeholder="메시지"></textarea>
+        </div>
+        <button class="add-btn" onclick="addRSVP()">추가하기</button>
+      </div>
+
       <div class="rsvp-list">
         <h3>💌 받은 메시지</h3>
         <div id="rsvp-list"></div>
       </div>
+
+      <div class="actions">
+        <button class="action-btn" onclick="exportData()">📄 데이터 내보내기</button>
+        <button class="action-btn" onclick="clearAllData()">🗑️ 모든 데이터 삭제</button>
+      </div>
     </div>
   </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-
-    const db = getFirestore(app);
-
+  <script>
     const CORRECT_PASSWORD = '0000';
+    const STORAGE_KEY = 'wedding_rsvp_data';
 
-    window.checkPassword = function() {
+    function getRSVPs() {
+      const data = localStorage.getItem(STORAGE_KEY);
+      return data ? JSON.parse(data) : [];
+    }
+
+    function saveRSVPs(rsvps) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(rsvps));
+    }
+
+    function checkPassword() {
       const input = document.getElementById('adminPassword').value;
       const message = document.getElementById('loginMessage');
       
@@ -363,82 +473,141 @@
           message.textContent = '';
         }, 3000);
       }
-    };
-
-    async function loadRSVPs() {
-      const rsvpList = document.getElementById("rsvp-list");
-      const q = query(collection(db, "rsvps"), orderBy("createdAt", "desc"));
-      
-      try {
-        const snapshot = await getDocs(q);
-        
-        if (snapshot.empty) {
-          rsvpList.innerHTML = `
-            <div class="empty-state">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 6L9 17l-5-5"/>
-              </svg>
-              <p>아직 받은 응답이 없습니다</p>
-            </div>
-          `;
-          return;
-        }
-
-        let attendCount = 0, absentCount = 0, pendingCount = 0;
-        rsvpList.innerHTML = "";
-
-        snapshot.forEach((docSnap) => {
-          const data = docSnap.data();
-          const status = data.status;
-          
-          if (status === "참석") attendCount++;
-          else if (status === "불참") absentCount++;
-          else pendingCount++;
-
-          const statusClass = 
-            status === "참석" ? "status-attend" :
-            status === "불참" ? "status-absent" : "status-pending";
-
-          const div = document.createElement("div");
-          div.className = "rsvp-item";
-          div.innerHTML = `
-            <div class="rsvp-header">
-              <div class="rsvp-name">${data.name}</div>
-              <div class="rsvp-status ${statusClass}">${status}</div>
-            </div>
-            <div class="rsvp-message">"${data.message}"</div>
-            <button class="delete-btn" onclick="deleteRSVP('${docSnap.id}')">삭제</button>
-          `;
-          rsvpList.appendChild(div);
-        });
-
-        document.getElementById('attendCount').textContent = attendCount;
-        document.getElementById('absentCount').textContent = absentCount;
-        document.getElementById('pendingCount').textContent = pendingCount;
-        document.getElementById('totalCount').textContent = attendCount + absentCount + pendingCount;
-
-      } catch (error) {
-        console.error("Error loading RSVPs:", error);
-        rsvpList.innerHTML = `
-          <div class="empty-state">
-            <p style="color: #ff6b6b;">데이터를 불러오는 중 오류가 발생했습니다</p>
-          </div>
-        `;
-      }
     }
 
-    window.deleteRSVP = async function(id) {
+    function loadRSVPs() {
+      const rsvpList = document.getElementById("rsvp-list");
+      const rsvps = getRSVPs();
+      
+      if (rsvps.length === 0) {
+        rsvpList.innerHTML = `
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+            <p>아직 받은 응답이 없습니다</p>
+          </div>
+        `;
+        updateStats(0, 0, 0);
+        return;
+      }
+
+      let attendCount = 0, absentCount = 0, pendingCount = 0;
+      rsvpList.innerHTML = "";
+
+      rsvps.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+      rsvps.forEach((rsvp, index) => {
+        const status = rsvp.status;
+        
+        if (status === "참석") attendCount++;
+        else if (status === "불참") absentCount++;
+        else pendingCount++;
+
+        const statusClass = 
+          status === "참석" ? "status-attend" :
+          status === "불참" ? "status-absent" : "status-pending";
+
+        const createdDate = new Date(rsvp.createdAt).toLocaleDateString('ko-KR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        const div = document.createElement("div");
+        div.className = "rsvp-item";
+        div.innerHTML = `
+          <div class="rsvp-date">${createdDate}</div>
+          <div class="rsvp-header">
+            <div class="rsvp-name">${rsvp.name}</div>
+            <div class="rsvp-status ${statusClass}">${status}</div>
+          </div>
+          <div class="rsvp-message">"${rsvp.message}"</div>
+          <button class="delete-btn" onclick="deleteRSVP(${index})">삭제</button>
+        `;
+        rsvpList.appendChild(div);
+      });
+
+      updateStats(attendCount, absentCount, pendingCount);
+    }
+
+    function updateStats(attend, absent, pending) {
+      document.getElementById('attendCount').textContent = attend;
+      document.getElementById('absentCount').textContent = absent;
+      document.getElementById('pendingCount').textContent = pending;
+      document.getElementById('totalCount').textContent = attend + absent + pending;
+    }
+
+    function addRSVP() {
+      const name = document.getElementById('newName').value.trim();
+      const status = document.getElementById('newStatus').value;
+      const message = document.getElementById('newMessage').value.trim();
+
+      if (!name) {
+        alert('이름을 입력해주세요.');
+        return;
+      }
+
+      const rsvps = getRSVPs();
+      const newRSVP = {
+        id: Date.now().toString(),
+        name: name,
+        status: status,
+        message: message || '메시지 없음',
+        createdAt: new Date().toISOString()
+      };
+
+      rsvps.push(newRSVP);
+      saveRSVPs(rsvps);
+
+      document.getElementById('newName').value = '';
+      document.getElementById('newStatus').value = '참석';
+      document.getElementById('newMessage').value = '';
+
+      loadRSVPs();
+      alert('새 응답이 추가되었습니다.');
+    }
+
+    function deleteRSVP(index) {
       if (confirm("정말 삭제하시겠습니까?")) {
-        try {
-          await deleteDoc(doc(db, "rsvps", id));
-          alert("삭제되었습니다");
+        const rsvps = getRSVPs();
+        rsvps.splice(index, 1);
+        saveRSVPs(rsvps);
+        loadRSVPs();
+        alert("삭제되었습니다");
+      }
+    }
+    function exportData() {
+      const rsvps = getRSVPs();
+      if (rsvps.length === 0) {
+        alert('내보낼 데이터가 없습니다.');
+        return;
+      }
+
+      const dataStr = JSON.stringify(rsvps, null, 2);
+      const dataBlob = new Blob([dataStr], {type: 'application/json'});
+      const url = URL.createObjectURL(dataBlob);
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `rsvp_data_${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    function clearAllData() {
+      if (confirm("정말 모든 데이터를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.")) {
+        if (confirm("한 번 더 확인합니다. 정말 삭제하시겠습니까?")) {
+          localStorage.removeItem(STORAGE_KEY);
           loadRSVPs();
-        } catch (error) {
-          console.error("Error deleting:", error);
-          alert("삭제 중 오류가 발생했습니다");
+          alert("모든 데이터가 삭제되었습니다.");
         }
       }
-    };
+    }
 
     document.getElementById('adminPassword').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
