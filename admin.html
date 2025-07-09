@@ -344,17 +344,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
     import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAbaauVIvPWPT1O_h4kElc0nVkfPaiTbl4",
-      authDomain: "poetic-planet-462812-f5.firebaseapp.com",
-      projectId: "poetic-planet-462812-f5",
-      storageBucket: "poetic-planet-462812-f5.firebasestorage.app",
-      messagingSenderId: "375231510481",
-      appId: "1:375231510481:web:5c06868eac02b01e0352f0",
-      measurementId: "G-EC6J2HWNQ6"
-    };
-
-    const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
     const CORRECT_PASSWORD = '0000';
