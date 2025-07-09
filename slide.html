@@ -562,6 +562,31 @@
       transform: scale(1.2);
     }
 
+    .admin-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(102, 102, 102, 0.8);
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      z-index: 200;
+    }
+
+    .admin-btn:hover {
+      background: rgba(85, 85, 85, 1);
+      transform: scale(1.05);
+    }
+
     @media (max-width: 480px) {
       .container {
         max-width: 100%;
@@ -608,6 +633,8 @@
 </head>
 <body>
   <div class="container">
+    <button class="admin-btn" onclick="openAdminPage()" title="관리자 페이지">⚙️</button>
+
     <div class="music-player" id="musicPlayer">
       <svg class="music-icon" viewBox="0 0 24 24" fill="currentColor">
         <path d="12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
@@ -741,7 +768,7 @@
   </div>
 
   <script>
-    const GUESTBOOK_STORAGE_KEY = 'wedding_guestbook';
+    const GUESTBOOK_STORAGE_KEY = 'wedding_rsvp_data';
 
     function getGuestbookEntries() {
       const data = localStorage.getItem(GUESTBOOK_STORAGE_KEY);
@@ -750,6 +777,11 @@
 
     function saveGuestbookEntries(entries) {
       localStorage.setItem(GUESTBOOK_STORAGE_KEY, JSON.stringify(entries));
+    }
+
+    function openAdminPage() {
+      window.open('./admin.html', '_blank');
+      
     }
 
     const bgMusic = document.getElementById('bgMusic');
@@ -896,15 +928,15 @@
       
       const entries = getGuestbookEntries();
       const newEntry = {
-        id: Date.now(),
+        id: Date.now().toString(),
         name,
         status,
         message,
         password,
-        date: new Date().toISOString()
+        createdAt: new Date().toISOString()
       };
       
-      entries.unshift(newEntry);
+      entries.push(newEntry);
       saveGuestbookEntries(entries);
       
       alert("소중한 마음이 전달되었습니다! 감사합니다 💕");
@@ -931,6 +963,8 @@
         return;
       }
       
+      entries.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
       listContainer.innerHTML = entries.map(entry => {
         const statusClass = entry.status === '참석' ? 'attend' : 
                            entry.status === '불참' ? 'absent' : 'maybe';
@@ -941,13 +975,13 @@
               <div class="guestbook-name">${entry.name}</div>
               <div>
                 <span class="guestbook-status ${statusClass}">${entry.status}</span>
-                <div class="guestbook-date">${formatDate(new Date(entry.date))}</div>
+                <div class="guestbook-date">${formatDate(new Date(entry.createdAt))}</div>
               </div>
             </div>
             <div class="guestbook-message">${entry.message.replace(/\n/g, '<br>')}</div>
             <div class="guestbook-actions">
               <input type="password" class="password-input" placeholder="비밀번호" data-entry-id="${entry.id}">
-              <button class="delete-btn" onclick="deleteEntry(${entry.id})">삭제</button>
+              <button class="delete-btn" onclick="deleteEntry('${entry.id}')">삭제</button>
             </div>
           </div>
         `;
@@ -1008,28 +1042,28 @@
       if (entries.length === 0) {
         const sampleData = [
           {
-            id: 1,
+            id: "1",
             name: "김친구",
             status: "참석",
             message: "정말 축하해 💕 너희들의 행복한 모습 보니까 나도 덩달아 기뻐진다. 결혼식 당일에 만나자!",
             password: "1234",
-            date: new Date(Date.now() - 3600000).toISOString()
+            createdAt: new Date(Date.now() - 3600000).toISOString()
           },
           {
-            id: 2,
+            id: "2",
             name: "이동생",
             status: "참석",
             message: "언니 오빠! 드디어 결혼하시는군요! 😍 오랫동안 행복하세요~",
             password: "1234",
-            date: new Date(Date.now() - 7200000).toISOString()
+            createdAt: new Date(Date.now() - 7200000).toISOString()
           },
           {
-            id: 3,
+            id: "3",
             name: "박선배",
             status: "불참",
             message: "축하드립니다! 아쉽게도 참석하지 못하지만 마음만은 함께하겠습니다. 새로운 시작을 진심으로 축복합니다! 🎉",
             password: "1234",
-            date: new Date(Date.now() - 86400000).toISOString()
+            createdAt: new Date(Date.now() - 86400000).toISOString()
           }
         ];
         saveGuestbookEntries(sampleData);
@@ -1037,6 +1071,7 @@
     }
 
     window.deleteEntry = deleteEntry;
+    window.openAdminPage = openAdminPage;
 
     updateCards();
     addSampleGuestbookData();
