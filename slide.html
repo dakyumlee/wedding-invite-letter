@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>결혼식 초대장</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>임냥쿤 ♥ 이핑핑 결혼식 초대장</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -83,73 +83,78 @@
 
     h1 {
       font-size: 32px;
-      color: #4a4a4a;
+      color: #2a2a2a;
       margin-bottom: 20px;
       font-weight: 600;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
     }
 
     h2 {
       font-size: 24px;
-      color: #4a4a4a;
-      margin-bottom: 20px;
+      color: #2a2a2a;
+      margin-bottom: 25px;
       font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     h3 {
       font-size: 18px;
-      color: #666;
+      color: #555;
       margin-bottom: 15px;
-      font-weight: 400;
+      font-weight: 500;
     }
 
     p {
-      font-size: 16px;
-      line-height: 1.8;
+      font-size: 15px;
+      line-height: 1.7;
       margin-bottom: 15px;
-      color: #444;
+      color: #555;
     }
 
     .main-photo {
       width: 280px;
       height: 200px;
-      background: linear-gradient(45deg, #f0f0f0, #e8e8e8);
-      border-radius: 15px;
-      margin: 20px 0;
+      background: #f5f5f5;
+      border-radius: 16px;
+      margin: 25px 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #999;
+      color: #aaa;
       font-size: 14px;
-      border: 2px dashed #ccc;
+      border: 1px dashed #d0d0d0;
+      font-weight: 400;
     }
 
     .date-info {
-      background: #f8f8f8;
-      padding: 20px;
-      border-radius: 15px;
-      margin: 20px 0;
+      background: #f9f9f9;
+      padding: 24px;
+      border-radius: 12px;
+      margin: 25px 0;
       width: 100%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .d-day {
       font-size: 20px;
       font-weight: 600;
-      color: #5a5a5a;
-      margin-top: 15px;
-      padding: 10px 20px;
-      background: #fff;
-      border-radius: 25px;
-      border: 2px solid #ddd;
+      color: #3a3a3a;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: white;
+      border-radius: 24px;
+      border: 1px solid #e8e8e8;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
 
     .location-info {
       text-align: left;
       width: 100%;
-      background: #f8f8f8;
-      padding: 20px;
-      border-radius: 15px;
-      margin: 20px 0;
+      background: #f9f9f9;
+      padding: 24px;
+      border-radius: 12px;
+      margin: 25px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .location-info p {
@@ -198,18 +203,19 @@
     }
 
     .account-info {
-      background: #f8f8f8;
-      padding: 20px;
-      border-radius: 15px;
-      margin: 20px 0;
+      background: #f9f9f9;
+      padding: 24px;
+      border-radius: 12px;
+      margin: 25px 0;
       width: 100%;
       text-align: left;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .account-item {
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #e8e8e8;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #f0f0f0;
     }
 
     .account-item:last-child {
@@ -219,40 +225,45 @@
 
     .account-name {
       font-weight: 600;
-      color: #5a5a5a;
-      margin-bottom: 5px;
+      color: #3a3a3a;
+      margin-bottom: 6px;
+      font-size: 15px;
     }
 
     .account-number {
       font-family: 'Courier New', monospace;
-      font-size: 15px;
+      font-size: 14px;
       color: #666;
+      letter-spacing: 0.5px;
     }
 
     .guestbook-tabs {
       display: flex;
       width: 100%;
-      margin-bottom: 20px;
-      border-radius: 10px;
+      margin-bottom: 25px;
+      border-radius: 12px;
       overflow: hidden;
-      background: #f0f0f0;
+      background: #f2f2f2;
+      padding: 4px;
     }
 
     .tab-btn {
       flex: 1;
-      padding: 12px;
+      padding: 12px 16px;
       border: none;
-      background: #f0f0f0;
+      background: transparent;
       color: #666;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
+      border-radius: 8px;
     }
 
     .tab-btn.active {
-      background: #666;
-      color: white;
+      background: white;
+      color: #3a3a3a;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
     .tab-content {
@@ -275,21 +286,22 @@
     .rsvp-form select,
     .rsvp-form textarea {
       width: 100%;
-      padding: 15px;
-      border: 2px solid #f0f0f0;
-      border-radius: 10px;
-      font-size: 16px;
+      padding: 16px 18px;
+      border: 1px solid #e8e8e8;
+      border-radius: 12px;
+      font-size: 15px;
       font-family: 'Noto Serif KR', serif;
-      background: #fafafa;
-      transition: border-color 0.3s ease;
+      background: white;
+      transition: all 0.3s ease;
     }
 
     .rsvp-form input:focus,
     .rsvp-form select:focus,
     .rsvp-form textarea:focus {
       outline: none;
-      border-color: #888;
-      background: #fff;
+      border-color: #bbb;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
     }
 
     .rsvp-form textarea {
@@ -298,20 +310,22 @@
     }
 
     .rsvp-form button {
-      background: #666;
+      background: #3a3a3a;
       color: white;
       border: none;
-      padding: 15px 30px;
-      border-radius: 25px;
-      font-size: 16px;
-      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
+      letter-spacing: 0.3px;
     }
 
     .rsvp-form button:hover {
-      background: #555;
-      transform: translateY(-2px);
+      background: #2a2a2a;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .guestbook-list {
@@ -321,37 +335,40 @@
     }
 
     .guestbook-item {
-      background: #f8f8f8;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 15px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 16px;
       text-align: left;
-      border-left: 4px solid #ddd;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .guestbook-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
+      align-items: flex-start;
+      margin-bottom: 12px;
     }
 
     .guestbook-name {
       font-weight: 600;
-      color: #5a5a5a;
-      font-size: 16px;
+      color: #3a3a3a;
+      font-size: 15px;
     }
 
     .guestbook-date {
       font-size: 12px;
       color: #999;
+      margin-top: 2px;
     }
 
     .guestbook-status {
-      font-size: 12px;
-      padding: 4px 8px;
+      font-size: 11px;
+      padding: 4px 10px;
       border-radius: 12px;
-      font-weight: 600;
+      font-weight: 500;
+      letter-spacing: 0.3px;
     }
 
     .guestbook-status.attend {
@@ -370,45 +387,48 @@
     }
 
     .guestbook-message {
-      color: #444;
+      color: #555;
       line-height: 1.6;
       font-size: 14px;
+      margin-bottom: 16px;
     }
 
     .guestbook-actions {
-      margin-top: 10px;
+      margin-top: 16px;
       display: flex;
-      gap: 8px;
+      gap: 10px;
+      align-items: center;
     }
 
     .delete-btn {
-      background: #ff6b6b;
+      background: #dc3545;
       color: white;
       border: none;
-      padding: 6px 12px;
-      border-radius: 15px;
+      padding: 8px 14px;
+      border-radius: 8px;
       font-size: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-weight: 500;
     }
 
     .delete-btn:hover {
-      background: #ff5252;
+      background: #c82333;
       transform: translateY(-1px);
     }
 
     .password-input {
-      width: 120px;
-      padding: 6px 10px;
-      border: 1px solid #ddd;
-      border-radius: 15px;
+      width: 130px;
+      padding: 8px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
       font-size: 12px;
       font-family: 'Noto Serif KR', serif;
     }
 
     .password-input:focus {
       outline: none;
-      border-color: #888;
+      border-color: #bbb;
     }
 
     .no-messages {
@@ -443,6 +463,309 @@
       height: 100%;
       object-fit: cover;
       border-radius: 13px;
+    }
+
+    .accordion {
+      width: 100%;
+      margin: 20px 0;
+    }
+
+    .accordion-item {
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      background: #f9f9f9;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .accordion-header {
+      padding: 18px 24px;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      color: #3a3a3a;
+      transition: all 0.3s ease;
+      font-size: 15px;
+    }
+
+    .accordion-header:hover {
+      background: rgba(0,0,0,0.02);
+    }
+
+    .accordion-header.active {
+      background: #3a3a3a;
+      color: white;
+    }
+
+    .accordion-icon {
+      transition: transform 0.3s ease;
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    .accordion-header.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .accordion-content.active {
+      max-height: 500px;
+    }
+
+    .accordion-body {
+      padding: 24px;
+      background: white;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    .timeline {
+      position: relative;
+      width: 100%;
+      margin: 30px 0;
+      padding: 0 10px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: #e0e0e0;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 32px;
+      padding-left: 60px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 19px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #4a4a4a;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px #e0e0e0;
+    }
+
+    .timeline-date {
+      font-size: 13px;
+      color: #888;
+      font-weight: 500;
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .timeline-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #3a3a3a;
+      margin-bottom: 10px;
+    }
+
+    .timeline-content {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      background: #f9f9f9;
+      padding: 16px 18px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    .gallery {
+      width: 100%;
+      margin: 20px 0;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      background: #f0f0f0;
+      border-radius: 10px;
+      border: 2px dashed #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #999;
+    }
+
+    .gallery-main {
+      grid-column: span 2;
+      aspect-ratio: 16/9;
+    }
+
+    .message-stats {
+      display: flex;
+      justify-content: space-around;
+      background: #f9f9f9;
+      padding: 20px 15px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 22px;
+      font-weight: 600;
+      color: #3a3a3a;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #888;
+      margin-top: 6px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+
+    .story-section {
+      text-align: left;
+      margin: 25px 0;
+    }
+
+    .story-card {
+      background: #f9f9f9;
+      padding: 22px 24px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .story-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #3a3a3a;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .story-content {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .family-info {
+      background: #f9f9f9;
+      padding: 24px;
+      border-radius: 12px;
+      margin: 25px 0;
+      width: 100%;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .family-section {
+      margin-bottom: 20px;
+    }
+
+    .family-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .family-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #3a3a3a;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .family-member {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .family-member:last-child {
+      border-bottom: none;
+    }
+
+    .member-role {
+      font-size: 14px;
+      color: #888;
+      font-weight: 500;
+    }
+
+    .member-name {
+      font-size: 15px;
+      color: #3a3a3a;
+      font-weight: 600;
+    }
+
+    .weather-info {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .weather-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .weather-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .dress-code {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .dress-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .dress-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .dress-emoji {
+      margin-right: 12px;
+      font-size: 18px;
     }
 
     .navigation {
@@ -587,6 +910,53 @@
       transform: scale(1.05);
     }
 
+    .contact-info {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .contact-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .contact-item:last-child {
+      border-bottom: none;
+    }
+
+    .contact-label {
+      font-size: 14px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .contact-value {
+      font-size: 14px;
+      color: #3a3a3a;
+      font-weight: 600;
+    }
+
+    .contact-btn {
+      background: #3a3a3a;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      background: #2a2a2a;
+    }
+
     @media (max-width: 480px) {
       .container {
         max-width: 100%;
@@ -633,7 +1003,7 @@
 </head>
 <body>
   <div class="container">
-    <button class="admin-btn" onclick="openAdminPage()" title="관리자 페이지">⚙️</button>
+    <button class="admin-btn" id="adminBtn" onclick="window.open('admin.html', '_blank')">⚙️</button>
 
     <div class="music-player" id="musicPlayer">
       <svg class="music-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -660,65 +1030,450 @@
       <div class="indicator-dot"></div>
       <div class="indicator-dot"></div>
       <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
     </div>
 
     <div class="card-stack">
       <div class="card active">
-        <h1>신랑 & 신부</h1>
-        <div class="main-photo">웨딩 사진</div>
-        <p>저희 두 사람이 사랑으로 하나 되어<br>결혼합니다</p>
-        <p>귀한 걸음 하시어 축복해주시면<br>감사하겠습니다</p>
+        <h1>임냥쿤 ♥ 이핑핑</h1>
+        <div class="main-photo">🐧 북극 웨딩 포토 🐧</div>
+        <p>영하 40도의 차가운 북극에서<br>뜨거운 사랑으로 하나 되어 결혼합니다</p>
+        <p>펭귄들과 함께하는 특별한 순간에<br>소중한 분들을 초대합니다</p>
         <div class="d-day">
           <span id="dday">D-DAY</span>
         </div>
       </div>
 
       <div class="card">
+        <h2>신랑 & 신부 소개</h2>
+        <div class="family-info">
+          <div class="family-section">
+            <div class="family-title">🤵 신랑 임냥쿤</div>
+            <div class="family-member">
+              <span class="member-role">나이</span>
+              <span class="member-name">35세</span>
+            </div>
+            <div class="family-member">
+              <span class="member-role">직업</span>
+              <span class="member-name">북극 탐험가</span>
+            </div>
+            <div class="family-member">
+              <span class="member-role">취미</span>
+              <span class="member-name">펭귄 관찰, 오로라 사진</span>
+            </div>
+            <div class="family-member">
+              <span class="member-role">좌우명</span>
+              <span class="member-name">"추워도 마음은 따뜻하게"</span>
+            </div>
+          </div>
+          
+          <div class="family-section">
+            <div class="family-title">👰 신부 이핑핑</div>
+            <div class="family-member">
+              <span class="member-role">나이</span>
+              <span class="member-name">28세</span>
+            </div>
+            <div class="family-member">
+              <span class="member-role">직업</span>
+              <span class="member-name">극지 기상학자</span>
+            </div>
+            <div class="family-member">
+              <span class="member-role">취미</span>
+              <span class="member-name">눈결정 연구, 북극곰 보호활동</span>
+            </div>
+            <div class="family-member">
+              <span class="member-role">좌우명</span>
+              <span class="member-name">"얼음보다 단단한 사랑"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>우리의 이야기</h2>
+        <div class="story-section">
+          <div class="story-card">
+            <div class="story-title">🧊 첫 만남 - 북극 연구소</div>
+            <div class="story-content">
+              2022년 북극 연구소에서 처음 만났습니다. 냥쿤이는 펭귄을 관찰하고 있었고, 핑핑이는 기상 데이터를 수집하고 있었어요. 영하 35도의 추위 속에서도 서로에게 따뜻함을 느꼈답니다.
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-title">🌌 오로라 아래 첫 데이트</div>
+            <div class="story-content">
+              2022년 겨울, 아름다운 오로라가 펼쳐진 밤에 첫 데이트를 했어요. 초록빛 오로라 아래에서 뜨거운 코코아를 마시며 서로의 꿈과 이야기를 나눴습니다. 그때부터 서로에게 특별한 감정을 느끼기 시작했어요.
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-title">💍 빙하 위 프러포즈</div>
+            <div class="story-content">
+              2024년 크리스마스, 거대한 빙하 위에서 프러포즈했습니다. 펭귄들이 지켜보는 가운데 "평생 함께 북극의 추위도 이겨내자"며 반지를 건넸어요. 핑핑이는 눈물이 순간 얼어버릴 정도로 감동했답니다.
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-title">🐧 펭귄들의 축복</div>
+            <div class="story-content">
+              프러포즈 후 주변 펭귄들이 마치 축복하듯 일제히 울음소리를 냈어요. 북극곰도 멀리서 박수를 치는 듯한 모습을 보였답니다. 자연이 함께 축복해주는 특별한 순간이었어요.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
         <h2>예식 안내</h2>
         <div class="date-info">
-          <h3>20XX년 X월 XX일 (X)</h3>
-          <h3>오전 XX시</h3>
+          <h3>2025년 12월 25일 (수) 크리스마스</h3>
+          <h3>오전 10시 (북극 표준시)</h3>
+          <p style="text-align: center; margin-top: 10px; font-size: 13px; color: #888;">
+            🌡️ 예상 기온: 영하 42도
+          </p>
         </div>
         <div class="location-info">
-          <p><strong>장소</strong></p>
-          <p>장소 상세</p>
-          <p style="margin-top: 15px; color: #666;">장소 상세2</p>
+          <p><strong>🏔️ 북극 아이스 채플</strong></p>
+          <p>Arctic Ice Chapel, North Pole</p>
+          <p>위도 90° 0' 0" N, 경도 0° 0' 0" E</p>
+          <p style="margin-top: 15px; color: #666;">산타클로스 마을에서 썰매로 10분 거리</p>
         </div>
-        <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23336243.430112567!2d-68.29893749999998!3d69.08445114999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4e753c9b20485bfd%3A0x4e5f0d379253c31!2z7JWE7YGs7Yux!5e0!3m2!1sko!2skr!4v1752042315807!5m2!1sko!2skr" allowfullscreen loading="lazy"></iframe>
+        <div class="weather-info">
+          <h3 style="text-align: center; margin-bottom: 15px;">🌨️ 당일 날씨 예보</h3>
+          <div class="weather-item">
+            <span>기온</span>
+            <span>영하 42도 ~ 영하 38도</span>
+          </div>
+          <div class="weather-item">
+            <span>날씨</span>
+            <span>맑음, 오로라 예상</span>
+          </div>
+          <div class="weather-item">
+            <span>바람</span>
+            <span>북풍 15km/h</span>
+          </div>
+          <div class="weather-item">
+            <span>습도</span>
+            <span>65% (건조함)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>결혼식 일정</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">09:30</div>
+            <div class="timeline-title">🧥 방한복 착용 & 게스트 입장</div>
+            <div class="timeline-content">제공되는 특수 방한복을 착용하고 썰매를 타고 입장합니다. 뜨거운 차와 함께 입장 준비를 해주세요.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">10:00</div>
+            <div class="timeline-title">🎵 식전 세레모니</div>
+            <div class="timeline-content">이누이트 전통 음악과 함께 펭귄들의 특별 공연이 펼쳐집니다.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">10:30</div>
+            <div class="timeline-title">💒 결혼 예식</div>
+            <div class="timeline-content">빙하로 만든 제단에서 신랑 입장, 신부 입장, 서약 교환, 얼음 반지 교환 순으로 진행됩니다.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">11:00</div>
+            <div class="timeline-title">🌌 오로라 축복식</div>
+            <div class="timeline-content">하늘에 펼쳐지는 오로라와 함께하는 특별한 축복 시간입니다.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">11:30</div>
+            <div class="timeline-title">📸 기념 촬영</div>
+            <div class="timeline-content">펭귄, 북극곰과 함께하는 소중한 기념 촬영 시간입니다.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">12:00</div>
+            <div class="timeline-title">🍲 따뜻한 식사</div>
+            <div class="timeline-content">이글루 레스토랑에서 뜨거운 순록 스튜와 함께 즐거운 시간을 보냅니다.</div>
+          </div>
         </div>
       </div>
 
       <div class="card">
         <h2>오시는 길</h2>
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span>🛷 썰매 이용시</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <strong>산타클로스 마을 출발</strong><br>
+                • 허스키 썰매: 소요시간 10분<br>
+                • 순록 썰매: 소요시간 15분<br>
+                • 전기 썰매: 소요시간 8분<br><br>
+                <strong>예약 필수</strong><br>
+                • 북극 교통공사: +1-800-ARCTIC<br>
+                • 온라인 예약 가능
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span>✈️ 항공 이용시</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <strong>북극 국제공항 (NPA)</strong><br>
+                • 인천 → 북극: 15시간 소요<br>
+                • 공항에서 셔틀썰매 운행<br>
+                • 방한복 대여 서비스 제공<br><br>
+                <strong>특별 항공편</strong><br>
+                • 웨딩 전용 차터기 이용 가능<br>
+                • 기내 난방 시설 완비
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span>🏨 숙박 안내</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <strong>이글루 호텔</strong><br>
+                • 예식장에서 도보 2분<br>
+                • 실내 온도 20도 유지<br>
+                • 오로라 관람 테라스 제공<br><br>
+                <strong>아이스 리조트</strong><br>
+                • 럭셔리 얼음 스위트룸<br>
+                • 온천 스파 시설 완비<br>
+                • 펭귄 관찰 투어 포함
+              </div>
+            </div>
+          </div>
+        </div>
+        
         <ul class="transport-list">
-          <li><strong>지하철/버스</strong><br>가는 길1<br>상세1</li>
-          <li><strong>주차안내</strong><br>주차안내2</li>
-          <li><a href="https://map.kakao.com/link/to/하우스가든홀,35.56263293636567,129.35368171142778">카카오맵으로 보기</a></li>
-          <li><a href="https://naver.me/FnMF3AJm">네이버지도로 보기</a></li>
-          <li><a href="tmap://route?goalname=하우스가든홀&goalx=129.35368171142778&goaly=35.56263293636567">티맵으로 길찾기</a></li>
+          <li><a href="https://maps.arctic.com/northpole">북극지도로 보기</a></li>
+          <li><a href="https://santa.navigation.com">산타 내비로 길찾기</a></li>
+          <li><a href="tel:+1-800-ARCTIC">썰매 예약 전화</a></li>
         </ul>
+      </div>
+
+      <div class="card">
+        <h2>복장 안내</h2>
+        <div class="dress-code">
+          <h3 style="text-align: center; margin-bottom: 20px;">❄️ 북극 웨딩 드레스코드</h3>
+          <div class="dress-item">
+            <span class="dress-emoji">🧥</span>
+            <span>두꺼운 패딩이나 모피 코트<br>(현장에서 특수 방한복 제공)</span>
+          </div>
+          <div class="dress-item">
+            <span class="dress-emoji">🧤</span>
+            <span>방수 장갑<br>(터치스크린 사용 가능한 것 권장)</span>
+          </div>
+          <div class="dress-item">
+            <span class="dress-emoji">👢</span>
+            <span>미끄럼 방지 부츠<br>(아이젠 제공)</span>
+          </div>
+          <div class="dress-item">
+            <span class="dress-emoji">🎩</span>
+            <span>방한모 또는 털모자<br>(이어플랩 필수)</span>
+          </div>
+          <div class="dress-item">
+            <span class="dress-emoji">🕶️</span>
+            <span>선글라스<br>(눈 반사 방지용)</span>
+          </div>
+          <div class="dress-item">
+            <span class="dress-emoji">🌡️</span>
+            <span>핫팩 20개 이상 준비 권장</span>
+          </div>
+        </div>
+        <p style="text-align: center; margin-top: 20px; color: #888; font-size: 13px;">
+          ※ 모든 방한용품은 현장에서도 대여 가능합니다<br>
+          ※ 의상 컬러는 화이트, 실버, 아이스블루 추천
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>갤러리</h2>
+        <div class="gallery">
+          <div class="gallery-grid">
+            <div class="gallery-item gallery-main">🐧 프러포즈 현장</div>
+            <div class="gallery-item">❄️ 첫 만남</div>
+            <div class="gallery-item">🌌 오로라 데이트</div>
+            <div class="gallery-item">🏔️ 빙하 트레킹</div>
+            <div class="gallery-item">🎿 스키 데이트</div>
+            <div class="gallery-item">🔥 캠프파이어</div>
+            <div class="gallery-item">⛄ 눈사람 만들기</div>
+          </div>
+          <p style="text-align: center; color: #888; font-size: 14px;">
+            더 많은 북극 로맨스 사진들은<br>
+            결혼식 후 온라인 앨범으로 공유드릴게요 📸
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>가족 소개</h2>
+        <div class="family-info">
+          <div class="family-section">
+            <div class="family-title">👨‍👩‍👦 신랑측 가족</div>
+            <div class="family-member">
+              <span class="member-role">아버지</span>
+              <span class="member-name">임북극 (북극곰 조련사)</span>
+            </div>
+            <div class="family-member">
+              <span class="member-role">어머니</span>
+              <span class="member-name">임빙하 (이글루 건축가)</span>
+            </div>
+            <div class="family-member">
+              <span class="member-role">여동생</span>
+              <span class="member-name">임냥냥 (펭귄 번역가)</span>
+            </div>
+          </div>
+          
+          <div class="family-section">
+            <div class="family-title">👨‍👩‍👧 신부측 가족</div>
+            <div class="family-member">
+              <span class="member-role">아버지</span>
+              <span class="member-name">이오로라 (극지연구소 소장)</span>
+            </div>
+            <div class="family-member">
+              <span class="member-role">어머니</span>
+              <span class="member-name">이눈송이 (북극 요리연구가)</span>
+            </div>
+            <div class="family-member">
+              <span class="member-role">동생1</span>
+              <span class="member-name">이핑크 (북극 패션디자이너)</span>
+            </div>
+            <div class="family-member">
+              <span class="member-role">동생2</span>
+              <span class="member-name">이팡팡 (북극 국군)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>연락처</h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <span class="contact-label">🤵 신랑 임냥쿤</span>
+            <button class="contact-btn" onclick="callNumber('+82-10-1234-5678')">📞 전화</button>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">👰 신부 이핑핑</span>
+            <button class="contact-btn" onclick="callNumber('+82-10-8765-4321')">📞 전화</button>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">🏔️ 신랑 아버지</span>
+            <button class="contact-btn" onclick="callNumber('+82-10-1111-2222')">📞 전화</button>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">❄️ 신부 어머니</span>
+            <button class="contact-btn" onclick="callNumber('+82-10-3333-4444')">📞 전화</button>
+          </div>
+        </div>
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span>📧 기타 연락 방법</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <p><strong>이메일</strong></p>
+                <p>냥쿤: nyangkun@arctic.love</p>
+                <p>핑핑: pingping@polar.heart</p>
+                <br>
+                <p><strong>카카오톡</strong></p>
+                <p>냥쿤: @arcticnyangkun</p>
+                <p>핑핑: @polarpingping</p>
+                <br>
+                <p><strong>인스타그램</strong></p>
+                <p>@nyangkun_pingping_wedding</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="card">
         <h2>마음 전하실 곳</h2>
         <div class="account-info">
           <div class="account-item">
-            <div class="account-name">신랑 김누구</div>
-            <div class="account-number">은행 어디</div>
+            <div class="account-name">신랑 임냥쿤</div>
+            <div class="account-number">북극은행 777-888-999000</div>
           </div>
           <div class="account-item">
-            <div class="account-name">신부 최누구</div>
-            <div class="account-number">은행 어디</div>
+            <div class="account-name">신부 이핑핑</div>
+            <div class="account-number">빙하은행 123-456-789012</div>
+          </div>
+          <div class="account-item">
+            <div class="account-name">혼주 임북극</div>
+            <div class="account-number">펭귄은행 111-222-333444</div>
+          </div>
+          <div class="account-item">
+            <div class="account-name">혼주 이오로라</div>
+            <div class="account-number">오로라은행 555-666-777888</div>
           </div>
         </div>
-        <p style="margin-top: 20px;">
-          <a href="https://qr.kakaopay.com/FTGG36235u" target="_blank" style="color: #666; text-decoration: none; font-weight: 600; border-bottom: 1px solid #eee;">💳 카카오페이로 간편 송금하기</a>
-        </p>
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span>💎 간편송금 방법</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <p><strong>북극페이</strong></p>
+                <p><a href="#" onclick="alert('북극페이로 이동합니다!')" style="color: #666; text-decoration: none; font-weight: 600; border-bottom: 1px solid #eee;">💳 북극페이로 간편 송금하기</a></p>
+                <br>
+                <p><strong>아이스뱅크</strong></p>
+                <p>아이스뱅크 앱 > 송금 > 계좌번호 입력</p>
+                <br>
+                <p><strong>펭귄톡 송금</strong></p>
+                <p>펭귄톡에서 "결혼축하금" 검색</p>
+                <br>
+                <p style="font-size: 14px; color: #888;">
+                  ❄️ 축의금은 마음만으로도 충분하지 않습니다. 돈내놔
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="card">
         <h2>방명록</h2>
+        <div class="message-stats">
+          <div class="stat-item">
+            <div class="stat-number" id="totalMessages">0</div>
+            <div class="stat-label">총 메시지</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="attendCount">0</div>
+            <div class="stat-label">참석 예정</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="absentCount">0</div>
+            <div class="stat-label">불참</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="maybeCount">0</div>
+            <div class="stat-label">미정</div>
+          </div>
+        </div>
+        
         <div class="guestbook-tabs">
           <button class="tab-btn active" data-tab="write">축하 메시지 작성</button>
           <button class="tab-btn" data-tab="view">방명록 보기</button>
@@ -729,13 +1484,13 @@
             <input type="text" id="guestName" placeholder="이름을 입력해주세요" required>
             <select id="guestStatus" required>
               <option value="">참석 여부를 선택해주세요</option>
-              <option value="참석">참석</option>
-              <option value="불참">불참</option>
-              <option value="미정">미정</option>
+              <option value="참석">🐧 참석할게요 (방한복 준비!)</option>
+              <option value="불참">❄️ 아쉽지만 불참이에요</option>
+              <option value="미정">🤔 아직 미정이에요</option>
             </select>
-            <textarea id="guestMessage" placeholder="축하 메시지를 남겨주세요" required></textarea>
-            <input type="password" id="guestPassword" placeholder="비밀번호 (수정/삭제용)" required>
-            <button type="submit">마음 전하기 💕</button>
+            <textarea id="guestMessage" placeholder="북극까지 오는 두 사람에게 따뜻한 축하 메시지를 남겨주세요 💝" required></textarea>
+            <input type="password" id="guestPassword" placeholder="비밀번호 (수정/삭제용, 4자리 이상)" required minlength="4">
+            <button type="submit">따뜻한 마음 전하기 💕</button>
           </form>
         </div>
 
@@ -748,17 +1503,6 @@
           </div>
         </div>
       </div>
-
-      <div class="card">
-        <h2>모바일 청첩장</h2>
-        <div class="qr-container">
-          <div class="qr-code">
-            <p>QR code 들어갈 자리</p>
-          </div>
-          <p>QR코드를 스캔하시면<br>모바일 청첩장을 보실 수 있습니다</p>
-          <p style="font-size: 14px; color: #888;">친구들에게 공유해주세요 💕</p>
-        </div>
-      </div>
     </div>
 
     <div class="navigation">
@@ -768,7 +1512,7 @@
   </div>
 
   <script>
-    const GUESTBOOK_STORAGE_KEY = 'wedding_rsvp_data';
+    const GUESTBOOK_STORAGE_KEY = 'arctic_wedding_guestbook';
 
     function getGuestbookEntries() {
       const data = localStorage.getItem(GUESTBOOK_STORAGE_KEY);
@@ -779,9 +1523,42 @@
       localStorage.setItem(GUESTBOOK_STORAGE_KEY, JSON.stringify(entries));
     }
 
-    function openAdminPage() {
-      window.open('./admin.html', '_blank');
+    function updateStats() {
+      const entries = getGuestbookEntries();
+      const total = entries.length;
+      const attend = entries.filter(e => e.status === '참석').length;
+      const absent = entries.filter(e => e.status === '불참').length;
+      const maybe = entries.filter(e => e.status === '미정').length;
       
+      document.getElementById('totalMessages').textContent = total;
+      document.getElementById('attendCount').textContent = attend;
+      document.getElementById('absentCount').textContent = absent;
+      document.getElementById('maybeCount').textContent = maybe;
+    }
+
+    function openAdminPage() {
+      alert('관리자 페이지는 현재 북극 서버 점검 중입니다 🐧');
+    }
+
+    function callNumber(phoneNumber) {
+      if (confirm(`${phoneNumber}로 전화를 걸까요?`)) {
+        window.location.href = `tel:${phoneNumber}`;
+      }
+    }
+
+    function toggleAccordion(header) {
+      const content = header.nextElementSibling;
+      const isActive = header.classList.contains('active');
+      
+      document.querySelectorAll('.accordion-header').forEach(h => {
+        h.classList.remove('active');
+        h.nextElementSibling.classList.remove('active');
+      });
+      
+      if (!isActive) {
+        header.classList.add('active');
+        content.classList.add('active');
+      }
     }
 
     const bgMusic = document.getElementById('bgMusic');
@@ -883,11 +1660,11 @@
       if (e.key === 'ArrowLeft') prevCard();
     });
 
-    const weddingDate = new Date('2025-09-13T11:00:00+09:00');
+    const weddingDate = new Date('2025-12-25T10:00:00+00:00');
     const today = new Date();
     const diffTime = weddingDate - today;
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    document.getElementById('dday').textContent = diffDays > 0 ? `D-${diffDays}` : '오늘입니다!';
+    document.getElementById('dday').textContent = diffDays > 0 ? `D-${diffDays}` : '오늘입니다! 🎄';
 
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -926,6 +1703,11 @@
         return;
       }
       
+      if (password.length < 4) {
+        alert('비밀번호는 4자리 이상 입력해주세요.');
+        return;
+      }
+      
       const entries = getGuestbookEntries();
       const newEntry = {
         id: Date.now().toString(),
@@ -938,8 +1720,9 @@
       
       entries.push(newEntry);
       saveGuestbookEntries(entries);
+      updateStats();
       
-      alert("소중한 마음이 전달되었습니다! 감사합니다 💕");
+      alert("따뜻한 마음이 북극까지 전달되었습니다! 감사합니다 💕🐧");
       guestbookForm.reset();
       
       tabBtns.forEach(b => b.classList.remove('active'));
@@ -1014,6 +1797,7 @@
       if (confirm('정말로 이 메시지를 삭제하시겠습니까?')) {
         entries.splice(entryIndex, 1);
         saveGuestbookEntries(entries);
+        updateStats();
         displayGuestbookEntries();
         alert('메시지가 삭제되었습니다.');
       }
@@ -1043,27 +1827,43 @@
         const sampleData = [
           {
             id: "1",
-            name: "김친구",
+            name: "펭귄킹",
             status: "참석",
-            message: "정말 축하해 💕 너희들의 행복한 모습 보니까 나도 덩달아 기뻐진다. 결혼식 당일에 만나자!",
+            message: "와! 드디어 북극에서 결혼식이라니! 🐧 우리 펭귄 가족들도 모두 축하해요. 오로라 아래에서 정말 로맨틱할 것 같아요. 두 분의 사랑이 북극의 추위보다 뜨겁길 바라요!",
             password: "1234",
             createdAt: new Date(Date.now() - 3600000).toISOString()
           },
           {
             id: "2",
-            name: "이동생",
+            name: "북극곰아저씨",
             status: "참석",
-            message: "언니 오빠! 드디어 결혼하시는군요! 😍 오랫동안 행복하세요~",
+            message: "크앙! 🐻‍❄️ 북극의 대표로서 축하드립니다! 냥쿤이와 핑핑이가 우리 북극에서 사랑의 둥지를 틀어주니 정말 기뻐요. 결혼식 당일 특별히 북극곰 댄스로 축하해드릴게요!",
             password: "1234",
             createdAt: new Date(Date.now() - 7200000).toISOString()
           },
           {
             id: "3",
-            name: "박선배",
-            status: "불참",
-            message: "축하드립니다! 아쉽게도 참석하지 못하지만 마음만은 함께하겠습니다. 새로운 시작을 진심으로 축복합니다! 🎉",
+            name: "산타클로스",
+            status: "참석",
+            message: "호호호! 🎅 크리스마스에 결혼식이라니 정말 특별하네요! 우리 엘프들과 함께 특별한 선물을 준비했어요. 썰매로 직접 배달해드릴게요. 메리 크리스마스 웨딩!",
             password: "1234",
             createdAt: new Date(Date.now() - 86400000).toISOString()
+          },
+          {
+            id: "4",
+            name: "이누이트친구",
+            status: "참석",
+            message: "정말 축하해요! ❄️ 북극에서 태어나고 자란 저로서는 두 분의 용기에 감탄합니다. 전통 이누이트 축복 의식을 준비했어요. 오로라 신령이 두 분을 축복해주실 거예요!",
+            password: "1234",
+            createdAt: new Date(Date.now() - 172800000).toISOString()
+          },
+          {
+            id: "5",
+            name: "순록루돌프",
+            status: "참석",
+            message: "으음~ 🦌 결혼을 축하해! 나랑 친구들이 결혼식 당일 특별 공연을 준비하고 있어. 하늘을 나는 순록 퍼레이드를 보여줄게! 두 분의 사랑도 하늘을 날 수 있길!",
+            password: "1234",
+            createdAt: new Date(Date.now() - 259200000).toISOString()
           }
         ];
         saveGuestbookEntries(sampleData);
@@ -1072,9 +1872,12 @@
 
     window.deleteEntry = deleteEntry;
     window.openAdminPage = openAdminPage;
+    window.toggleAccordion = toggleAccordion;
+    window.callNumber = callNumber;
 
     updateCards();
     addSampleGuestbookData();
+    updateStats();
   </script>
 </body>
 </html>
