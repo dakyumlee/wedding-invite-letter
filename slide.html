@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>결혼식 초대장</title>
+  <title>수지 & 현동의 결혼식 초대장</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -622,6 +622,10 @@
       </div>
     </div>
 
+    <audio id="bgMusic" loop>
+      <source src="변진섭 - 숙녀에게   가사 (Lyrics).mp3" type="audio/mpeg">
+    </audio>
+
     <div class="card-indicator">
       <div class="indicator-dot active"></div>
       <div class="indicator-dot"></div>
@@ -748,20 +752,39 @@
       localStorage.setItem(GUESTBOOK_STORAGE_KEY, JSON.stringify(entries));
     }
 
+    const bgMusic = document.getElementById('bgMusic');
     const musicPlayer = document.getElementById('musicPlayer');
     let isPlaying = false;
 
     function toggleMusic() {
       if (isPlaying) {
+        bgMusic.pause();
         musicPlayer.classList.remove('playing');
         isPlaying = false;
       } else {
+        bgMusic.play().catch(e => console.log('음악 재생 실패:', e));
         musicPlayer.classList.add('playing');
         isPlaying = true;
       }
     }
 
+    function startMusic() {
+      bgMusic.play().catch(e => {
+        console.log('자동재생 실패:', e);
+      });
+      musicPlayer.classList.add('playing');
+      isPlaying = true;
+    }
+
     musicPlayer.addEventListener('click', toggleMusic);
+
+    document.addEventListener('click', () => {
+      if (!isPlaying) {
+        startMusic();
+      }
+    }, { once: true });
+
+    setTimeout(startMusic, 1000);
 
     const cards = document.querySelectorAll('.card');
     const indicators = document.querySelectorAll('.indicator-dot');
