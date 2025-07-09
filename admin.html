@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>관리자 페이지</title>
+  <title>수지 & 현동의 결혼식 초대장</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -18,220 +18,375 @@
       background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
       min-height: 100vh;
       color: #2c2c2c;
-      padding: 20px;
+      overflow-x: hidden;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 400px;
       margin: 0 auto;
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    .header {
+    .card-stack {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .card {
+      position: absolute;
+      width: 350px;
+      height: 600px;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
       text-align: center;
-      margin-bottom: 40px;
+      backface-visibility: hidden;
+      transition: all 0.6s ease;
+      overflow-y: auto;
     }
 
-    .header h1 {
+    .card.active {
+      z-index: 10;
+      transform: translateX(-50%) translateY(-50%) scale(1);
+    }
+
+    .card.prev {
+      z-index: 5;
+      transform: translateX(-50%) translateY(-50%) scale(0.95) rotateY(-15deg) translateZ(-50px);
+      opacity: 0.7;
+    }
+
+    .card.next {
+      z-index: 5;
+      transform: translateX(-50%) translateY(-50%) scale(0.95) rotateY(15deg) translateZ(-50px);
+      opacity: 0.7;
+    }
+
+    .card.hidden {
+      z-index: 1;
+      transform: translateX(-50%) translateY(-50%) scale(0.8) translateZ(-100px);
+      opacity: 0;
+    }
+
+    h1 {
       font-size: 32px;
       color: #4a4a4a;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       font-weight: 600;
       letter-spacing: 2px;
     }
 
-    .header p {
-      color: #666;
-      font-size: 16px;
-    }
-
-    .login-container, .admin-container {
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      padding: 40px;
-      margin-bottom: 30px;
-    }
-
-    .admin-container {
-      display: none;
-    }
-
-    .login-title {
-      text-align: center;
+    h2 {
       font-size: 24px;
       color: #4a4a4a;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       font-weight: 600;
     }
 
-    .login-form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
+    h3 {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 15px;
+      font-weight: 400;
     }
 
-    .login-form input {
-      width: 100%;
-      max-width: 300px;
-      padding: 15px 20px;
-      border: 2px solid #f0f0f0;
+    p {
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      color: #444;
+    }
+
+    .main-photo {
+      width: 280px;
+      height: 200px;
+      background: linear-gradient(45deg, #f0f0f0, #e8e8e8);
       border-radius: 15px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 14px;
+      border: 2px dashed #ccc;
+    }
+
+    .date-info {
+      background: #f8f8f8;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 20px 0;
+      width: 100%;
+    }
+
+    .d-day {
+      font-size: 20px;
+      font-weight: 600;
+      color: #5a5a5a;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #fff;
+      border-radius: 25px;
+      border: 2px solid #ddd;
+    }
+
+    .location-info {
+      text-align: left;
+      width: 100%;
+      background: #f8f8f8;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 20px 0;
+    }
+
+    .location-info p {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 200px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 20px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .transport-list {
+      list-style: none;
+      text-align: left;
+      width: 100%;
+    }
+
+    .transport-list li {
+      margin-bottom: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .transport-list a {
+      color: #666;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #eee;
+    }
+
+    .transport-list a:hover {
+      border-bottom: 1px solid #999;
+    }
+
+    .account-info {
+      background: #f8f8f8;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 20px 0;
+      width: 100%;
+      text-align: left;
+    }
+
+    .account-item {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .account-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .account-name {
+      font-weight: 600;
+      color: #5a5a5a;
+      margin-bottom: 5px;
+    }
+
+    .account-number {
+      font-family: 'Courier New', monospace;
+      font-size: 15px;
+      color: #666;
+    }
+
+    .guestbook-tabs {
+      display: flex;
+      width: 100%;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f0f0f0;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      background: #f0f0f0;
+      color: #666;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active {
+      background: #666;
+      color: white;
+    }
+
+    .tab-content {
+      width: 100%;
+      min-height: 300px;
+    }
+
+    .tab-content.hidden {
+      display: none;
+    }
+
+    .rsvp-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .rsvp-form input,
+    .rsvp-form select,
+    .rsvp-form textarea {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #f0f0f0;
+      border-radius: 10px;
       font-size: 16px;
       font-family: 'Noto Serif KR', serif;
       background: #fafafa;
-      transition: all 0.3s ease;
-      text-align: center;
+      transition: border-color 0.3s ease;
     }
 
-    .login-form input:focus {
+    .rsvp-form input:focus,
+    .rsvp-form select:focus,
+    .rsvp-form textarea:focus {
       outline: none;
       border-color: #888;
       background: #fff;
     }
 
-    .login-form button {
+    .rsvp-form textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .rsvp-form button {
       background: #666;
       color: white;
       border: none;
-      padding: 15px 40px;
+      padding: 15px 30px;
       border-radius: 25px;
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      font-family: 'Noto Serif KR', serif;
     }
 
-    .login-form button:hover {
+    .rsvp-form button:hover {
       background: #555;
       transform: translateY(-2px);
     }
 
-    #loginMessage {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 14px;
-    }
-
-    .admin-title {
-      text-align: center;
-      font-size: 28px;
-      color: #4a4a4a;
-      margin-bottom: 30px;
-      font-weight: 600;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-
-    .stat-card {
-      background: #f8f8f8;
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-3px);
-    }
-
-    .stat-number {
-      font-size: 32px;
-      font-weight: 600;
-      color: #4a4a4a;
-      margin-bottom: 8px;
-    }
-
-    .stat-label {
-      font-size: 14px;
-      color: #666;
-      font-weight: 500;
-    }
-
-    .rsvp-list {
-      background: #f8f8f8;
-      border-radius: 15px;
-      padding: 30px;
-      max-height: 500px;
+    .guestbook-list {
+      max-height: 400px;
       overflow-y: auto;
+      padding: 10px 0;
     }
 
-    .rsvp-list h3 {
-      color: #4a4a4a;
-      margin-bottom: 20px;
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .rsvp-item {
-      background: #fff;
-      padding: 20px;
-      border-radius: 15px;
+    .guestbook-item {
+      background: #f8f8f8;
+      padding: 15px;
+      border-radius: 10px;
       margin-bottom: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      border-left: 4px solid #666;
-      transition: all 0.3s ease;
+      text-align: left;
+      border-left: 4px solid #ddd;
     }
 
-    .rsvp-item:hover {
-      transform: translateX(5px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    }
-
-    .rsvp-header {
+    .guestbook-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
     }
 
-    .rsvp-name {
+    .guestbook-name {
       font-weight: 600;
-      color: #4a4a4a;
-      font-size: 18px;
+      color: #5a5a5a;
+      font-size: 16px;
     }
 
-    .rsvp-status {
-      padding: 5px 12px;
-      border-radius: 20px;
+    .guestbook-date {
       font-size: 12px;
+      color: #999;
+    }
+
+    .guestbook-status {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 12px;
       font-weight: 600;
     }
 
-    .status-attend {
+    .guestbook-status.attend {
       background: #e8f5e8;
-      color: #2d5a2d;
+      color: #4a8c4a;
     }
 
-    .status-absent {
-      background: #ffeaea;
-      color: #cc2d2d;
+    .guestbook-status.absent {
+      background: #ffe8e8;
+      color: #c44444;
     }
 
-    .status-pending {
-      background: #fff4e6;
-      color: #cc8800;
+    .guestbook-status.maybe {
+      background: #fff3e0;
+      color: #e68900;
     }
 
-    .rsvp-message {
-      color: #666;
-      font-style: italic;
-      margin-bottom: 15px;
+    .guestbook-message {
+      color: #444;
       line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .guestbook-actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
     }
 
     .delete-btn {
       background: #ff6b6b;
       color: white;
       border: none;
-      padding: 8px 15px;
-      border-radius: 20px;
+      padding: 6px 12px;
+      border-radius: 15px;
       font-size: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -239,223 +394,603 @@
 
     .delete-btn:hover {
       background: #ff5252;
+      transform: translateY(-1px);
+    }
+
+    .password-input {
+      width: 120px;
+      padding: 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      font-size: 12px;
+      font-family: 'Noto Serif KR', serif;
+    }
+
+    .password-input:focus {
+      outline: none;
+      border-color: #888;
+    }
+
+    .no-messages {
+      text-align: center;
+      color: #999;
+      font-style: italic;
+      padding: 40px 20px;
+    }
+
+    .qr-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .qr-code {
+      width: 200px;
+      height: 200px;
+      background: #f0f0f0;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      border: 2px dashed #ccc;
+      overflow: hidden;
+    }
+
+    .qr-code img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 13px;
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 60px;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(102, 102, 102, 0.8);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-btn:hover {
+      background: rgba(85, 85, 85, 1);
       transform: scale(1.05);
     }
 
-    .empty-state {
-      text-align: center;
-      padding: 40px;
-      color: #999;
+    .music-player {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .empty-state svg {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 15px;
-      opacity: 0.5;
+    .music-icon {
+      width: 20px;
+      height: 20px;
+      color: #666;
+      transition: color 0.3s ease;
+      opacity: 0.7;
     }
 
-    @media (max-width: 768px) {
-      .container {
-        padding: 0 10px;
-      }
+    .music-player.playing .music-icon {
+      color: #4a4a4a;
+      opacity: 1;
+    }
 
-      .login-container, .admin-container {
-        padding: 30px 20px;
-      }
+    .wave-container {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      height: 20px;
+    }
 
-      .stats-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 15px;
-      }
+    .wave-bar {
+      width: 3px;
+      background: rgba(102, 102, 102, 0.3);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
 
-      .rsvp-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
+    .wave-bar:nth-child(1) { height: 8px; }
+    .wave-bar:nth-child(2) { height: 12px; }
+    .wave-bar:nth-child(3) { height: 16px; }
+    .wave-bar:nth-child(4) { height: 10px; }
+    .wave-bar:nth-child(5) { height: 14px; }
+    .wave-bar:nth-child(6) { height: 8px; }
+
+    .music-player.playing .wave-bar {
+      background: rgba(102, 102, 102, 0.8);
+      animation: wave 1.2s ease-in-out infinite;
+    }
+
+    .music-player.playing .wave-bar:nth-child(1) { animation-delay: 0s; }
+    .music-player.playing .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+    .music-player.playing .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+    .music-player.playing .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+    .music-player.playing .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+    .music-player.playing .wave-bar:nth-child(6) { animation-delay: 0.5s; }
+
+    @keyframes wave {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(1.5); }
+    }
+
+    .card-indicator {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+
+    .indicator-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(102, 102, 102, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .indicator-dot.active {
+      background: #666;
+      transform: scale(1.2);
     }
 
     @media (max-width: 480px) {
-      .header h1 {
+      .container {
+        max-width: 100%;
+        padding: 0 10px;
+      }
+
+      .card {
+        width: 320px;
+        height: 580px;
+        padding: 30px 25px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      .main-photo {
+        width: 250px;
+        height: 180px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .card {
+        width: 300px;
+        height: 560px;
+        padding: 25px 20px;
+      }
+
+      h1 {
         font-size: 24px;
       }
 
-      .login-container, .admin-container {
-        padding: 25px 15px;
-      }
-
-      .stat-card {
-        padding: 20px;
-      }
-
-      .stat-number {
-        font-size: 24px;
+      .main-photo {
+        width: 220px;
+        height: 160px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <h1>관리자 페이지</h1>
-      <p>수지 & 현동의 결혼식 RSVP 관리</p>
+    <div class="music-player" id="musicPlayer">
+      <svg class="music-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+      </svg>
+      <div class="wave-container">
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+      </div>
     </div>
 
-    <div class="login-container">
-      <h2 class="login-title">🔐 관리자 인증</h2>
-      <div class="login-form">
-        <input type="password" id="adminPassword" placeholder="비밀번호를 입력해주세요">
-        <button onclick="checkPassword()">로그인</button>
-      </div>
-      <p id="loginMessage"></p>
+    <div class="card-indicator">
+      <div class="indicator-dot active"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
+      <div class="indicator-dot"></div>
     </div>
 
-    <div class="admin-container">
-      <h2 class="admin-title">📊 RSVP 현황</h2>
-      
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number" id="attendCount">0</div>
-          <div class="stat-label">참석</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="absentCount">0</div>
-          <div class="stat-label">불참</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="pendingCount">0</div>
-          <div class="stat-label">미정</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="totalCount">0</div>
-          <div class="stat-label">총 응답</div>
+    <div class="card-stack">
+      <div class="card active">
+        <h1>신랑 & 신부</h1>
+        <div class="main-photo">웨딩 사진</div>
+        <p>저희 두 사람이 사랑으로 하나 되어<br>결혼합니다</p>
+        <p>귀한 걸음 하시어 축복해주시면<br>감사하겠습니다</p>
+        <div class="d-day">
+          <span id="dday">D-DAY</span>
         </div>
       </div>
 
-      <div class="rsvp-list">
-        <h3>💌 받은 메시지</h3>
-        <div id="rsvp-list"></div>
+      <div class="card">
+        <h2>예식 안내</h2>
+        <div class="date-info">
+          <h3>20XX년 X월 XX일 (X)</h3>
+          <h3>오전 XX시</h3>
+        </div>
+        <div class="location-info">
+          <p><strong>장소</strong></p>
+          <p>장소 상세</p>
+          <p style="margin-top: 15px; color: #666;">장소 상세2</p>
+        </div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23336243.430112567!2d-68.29893749999998!3d69.08445114999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4e753c9b20485bfd%3A0x4e5f0d379253c31!2z7JWE7YGs7Yux!5e0!3m2!1sko!2skr!4v1752042315807!5m2!1sko!2skr" allowfullscreen loading="lazy"></iframe>
+        </div>
       </div>
+
+      <div class="card">
+        <h2>오시는 길</h2>
+        <ul class="transport-list">
+          <li><strong>지하철/버스</strong><br>가는 길1<br>상세1</li>
+          <li><strong>주차안내</strong><br>주차안내2</li>
+          <li><a href="https://map.kakao.com/link/to/하우스가든홀,35.56263293636567,129.35368171142778">카카오맵으로 보기</a></li>
+          <li><a href="https://naver.me/FnMF3AJm">네이버지도로 보기</a></li>
+          <li><a href="tmap://route?goalname=하우스가든홀&goalx=129.35368171142778&goaly=35.56263293636567">티맵으로 길찾기</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>마음 전하실 곳</h2>
+        <div class="account-info">
+          <div class="account-item">
+            <div class="account-name">신랑 김누구</div>
+            <div class="account-number">은행 어디</div>
+          </div>
+          <div class="account-item">
+            <div class="account-name">신부 최누구</div>
+            <div class="account-number">은행 어디</div>
+          </div>
+        </div>
+        <p style="margin-top: 20px;">
+          <a href="https://qr.kakaopay.com/FTGG36235u" target="_blank" style="color: #666; text-decoration: none; font-weight: 600; border-bottom: 1px solid #eee;">💳 카카오페이로 간편 송금하기</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>방명록</h2>
+        <div class="guestbook-tabs">
+          <button class="tab-btn active" data-tab="write">축하 메시지 작성</button>
+          <button class="tab-btn" data-tab="view">방명록 보기</button>
+        </div>
+        
+        <div class="tab-content" id="writeTab">
+          <form class="rsvp-form" id="guestbookForm">
+            <input type="text" id="guestName" placeholder="이름을 입력해주세요" required>
+            <select id="guestStatus" required>
+              <option value="">참석 여부를 선택해주세요</option>
+              <option value="참석">참석</option>
+              <option value="불참">불참</option>
+              <option value="미정">미정</option>
+            </select>
+            <textarea id="guestMessage" placeholder="축하 메시지를 남겨주세요" required></textarea>
+            <input type="password" id="guestPassword" placeholder="비밀번호 (수정/삭제용)" required>
+            <button type="submit">마음 전하기 💕</button>
+          </form>
+        </div>
+
+        <div class="tab-content hidden" id="viewTab">
+          <div class="guestbook-list" id="guestbookList">
+            <div class="no-messages">
+              아직 작성된 메시지가 없습니다.<br>
+              첫 번째 축하 메시지를 남겨주세요! 💝
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>모바일 청첩장</h2>
+        <div class="qr-container">
+          <div class="qr-code">
+            <p>QR code 들어갈 자리</p>
+          </div>
+          <p>QR코드를 스캔하시면<br>모바일 청첩장을 보실 수 있습니다</p>
+          <p style="font-size: 14px; color: #888;">친구들에게 공유해주세요 💕</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="navigation">
+      <button class="nav-btn" id="prevBtn">‹</button>
+      <button class="nav-btn" id="nextBtn">›</button>
     </div>
   </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+  <script>
+    const musicPlayer = document.getElementById('musicPlayer');
+    let isPlaying = false;
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAbaauVIvPWPT1O_h4kElc0nVkfPaiTbl4",
-      authDomain: "poetic-planet-462812-f5.firebaseapp.com",
-      projectId: "poetic-planet-462812-f5",
-      storageBucket: "poetic-planet-462812-f5.firebasestorage.app",
-      messagingSenderId: "375231510481",
-      appId: "1:375231510481:web:5c06868eac02b01e0352f0",
-      measurementId: "G-EC6J2HWNQ6"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    const CORRECT_PASSWORD = '980624';
-
-    window.checkPassword = function() {
-      const input = document.getElementById('adminPassword').value;
-      const message = document.getElementById('loginMessage');
-      
-      if (input === CORRECT_PASSWORD) {
-        document.querySelector('.login-container').style.display = 'none';
-        document.querySelector('.admin-container').style.display = 'block';
-        loadRSVPs();
+    function toggleMusic() {
+      if (isPlaying) {
+        musicPlayer.classList.remove('playing');
+        isPlaying = false;
       } else {
-        message.textContent = '❌ 비밀번호가 틀렸습니다';
-        message.style.color = '#ff6b6b';
-        setTimeout(() => {
-          message.textContent = '';
-        }, 3000);
-      }
-    };
-
-    async function loadRSVPs() {
-      const rsvpList = document.getElementById("rsvp-list");
-      const q = query(collection(db, "rsvps"), orderBy("createdAt", "desc"));
-      
-      try {
-        const snapshot = await getDocs(q);
-        
-        if (snapshot.empty) {
-          rsvpList.innerHTML = `
-            <div class="empty-state">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 6L9 17l-5-5"/>
-              </svg>
-              <p>아직 받은 응답이 없습니다</p>
-            </div>
-          `;
-          return;
-        }
-
-        let attendCount = 0, absentCount = 0, pendingCount = 0;
-        rsvpList.innerHTML = "";
-
-        snapshot.forEach((docSnap) => {
-          const data = docSnap.data();
-          const status = data.status;
-          
-          if (status === "참석") attendCount++;
-          else if (status === "불참") absentCount++;
-          else pendingCount++;
-
-          const statusClass = 
-            status === "참석" ? "status-attend" :
-            status === "불참" ? "status-absent" : "status-pending";
-
-          const div = document.createElement("div");
-          div.className = "rsvp-item";
-          div.innerHTML = `
-            <div class="rsvp-header">
-              <div class="rsvp-name">${data.name}</div>
-              <div class="rsvp-status ${statusClass}">${status}</div>
-            </div>
-            <div class="rsvp-message">"${data.message}"</div>
-            <button class="delete-btn" onclick="deleteRSVP('${docSnap.id}')">삭제</button>
-          `;
-          rsvpList.appendChild(div);
-        });
-
-        document.getElementById('attendCount').textContent = attendCount;
-        document.getElementById('absentCount').textContent = absentCount;
-        document.getElementById('pendingCount').textContent = pendingCount;
-        document.getElementById('totalCount').textContent = attendCount + absentCount + pendingCount;
-
-      } catch (error) {
-        console.error("Error loading RSVPs:", error);
-        rsvpList.innerHTML = `
-          <div class="empty-state">
-            <p style="color: #ff6b6b;">데이터를 불러오는 중 오류가 발생했습니다</p>
-          </div>
-        `;
+        musicPlayer.classList.add('playing');
+        isPlaying = true;
       }
     }
 
-    window.deleteRSVP = async function(id) {
-      if (confirm("정말 삭제하시겠습니까?")) {
-        try {
-          await deleteDoc(doc(db, "rsvps", id));
-          alert("삭제되었습니다");
-          loadRSVPs();
-        } catch (error) {
-          console.error("Error deleting:", error);
-          alert("삭제 중 오류가 발생했습니다");
+    musicPlayer.addEventListener('click', toggleMusic);
+
+    const cards = document.querySelectorAll('.card');
+    const indicators = document.querySelectorAll('.indicator-dot');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
+
+    function updateCards() {
+      cards.forEach((card, index) => {
+        card.classList.remove('active', 'prev', 'next', 'hidden');
+        indicators[index].classList.remove('active');
+        
+        if (index === currentIndex) {
+          card.classList.add('active');
+          indicators[index].classList.add('active');
+        } else if (index === currentIndex - 1) {
+          card.classList.add('prev');
+        } else if (index === currentIndex + 1) {
+          card.classList.add('next');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    function nextCard() {
+      currentIndex = (currentIndex + 1) % cards.length;
+      updateCards();
+    }
+
+    function prevCard() {
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      updateCards();
+    }
+
+    prevBtn.addEventListener('click', prevCard);
+    nextBtn.addEventListener('click', nextCard);
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeDistance = Math.abs(touchEndX - touchStartX);
+      if (swipeDistance > 50) {
+        if (touchEndX < touchStartX) {
+          nextCard();
+        } else {
+          prevCard();
         }
       }
-    };
+    }
 
-    document.getElementById('adminPassword').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        checkPassword();
-      }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextCard();
+      if (e.key === 'ArrowLeft') prevCard();
     });
+
+    const weddingDate = new Date('2025-09-13T11:00:00+09:00');
+    const today = new Date();
+    const diffTime = weddingDate - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    document.getElementById('dday').textContent = diffDays > 0 ? `D-${diffDays}` : '오늘입니다!';
+
+    let guestbookEntries = [];
+
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.dataset.tab;
+        
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        tabContents.forEach(content => {
+          content.classList.add('hidden');
+        });
+        
+        if (targetTab === 'write') {
+          document.getElementById('writeTab').classList.remove('hidden');
+        } else if (targetTab === 'view') {
+          document.getElementById('viewTab').classList.remove('hidden');
+          displayGuestbookEntries();
+        }
+      });
+    });
+
+    const guestbookForm = document.getElementById('guestbookForm');
+    guestbookForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('guestName').value;
+      const status = document.getElementById('guestStatus').value;
+      const message = document.getElementById('guestMessage').value;
+      const password = document.getElementById('guestPassword').value;
+      
+      const entry = {
+        id: Date.now(),
+        name,
+        status,
+        message,
+        password,
+        date: new Date()
+      };
+      
+      guestbookEntries.unshift(entry);
+      
+      alert("소중한 마음이 전달되었습니다! 감사합니다 💕");
+      guestbookForm.reset();
+      
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabBtns[1].classList.add('active');
+      document.getElementById('writeTab').classList.add('hidden');
+      document.getElementById('viewTab').classList.remove('hidden');
+      displayGuestbookEntries();
+    });
+
+    function displayGuestbookEntries() {
+      const listContainer = document.getElementById('guestbookList');
+      
+      if (guestbookEntries.length === 0) {
+        listContainer.innerHTML = `
+          <div class="no-messages">
+            아직 작성된 메시지가 없습니다.<br>
+            첫 번째 축하 메시지를 남겨주세요! 💝
+          </div>
+        `;
+        return;
+      }
+      
+      listContainer.innerHTML = guestbookEntries.map(entry => {
+        const statusClass = entry.status === '참석' ? 'attend' : 
+                           entry.status === '불참' ? 'absent' : 'maybe';
+        
+        return `
+          <div class="guestbook-item" data-entry-id="${entry.id}">
+            <div class="guestbook-header">
+              <div class="guestbook-name">${entry.name}</div>
+              <div>
+                <span class="guestbook-status ${statusClass}">${entry.status}</span>
+                <div class="guestbook-date">${formatDate(entry.date)}</div>
+              </div>
+            </div>
+            <div class="guestbook-message">${entry.message.replace(/\n/g, '<br>')}</div>
+            <div class="guestbook-actions">
+              <input type="password" class="password-input" placeholder="비밀번호" data-entry-id="${entry.id}">
+              <button class="delete-btn" onclick="deleteEntry(${entry.id})">삭제</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function deleteEntry(entryId) {
+      const passwordInput = document.querySelector(`input[data-entry-id="${entryId}"]`);
+      const enteredPassword = passwordInput.value;
+      
+      if (!enteredPassword) {
+        alert('비밀번호를 입력해주세요.');
+        return;
+      }
+      
+      const entry = guestbookEntries.find(e => e.id === entryId);
+      
+      if (!entry) {
+        alert('메시지를 찾을 수 없습니다.');
+        return;
+      }
+      
+      if (entry.password !== enteredPassword) {
+        alert('비밀번호가 일치하지 않습니다.');
+        passwordInput.value = '';
+        return;
+      }
+      
+      if (confirm('정말로 이 메시지를 삭제하시겠습니까?')) {
+        guestbookEntries = guestbookEntries.filter(e => e.id !== entryId);
+        displayGuestbookEntries();
+        alert('메시지가 삭제되었습니다.');
+      }
+    }
+
+    function formatDate(date) {
+      const now = new Date();
+      const diff = now - date;
+      const minutes = Math.floor(diff / 60000);
+      const hours = Math.floor(diff / 3600000);
+      const days = Math.floor(diff / 86400000);
+      
+      if (minutes < 1) return '방금 전';
+      if (minutes < 60) return `${minutes}분 전`;
+      if (hours < 24) return `${hours}시간 전`;
+      if (days < 7) return `${days}일 전`;
+      
+      return date.toLocaleDateString('ko-KR', { 
+        month: 'short', 
+        day: 'numeric' 
+      });
+    }
+
+    updateCards();
+    
+    setTimeout(() => {
+      guestbookEntries.push(
+        {
+          id: 1,
+          name: "김친구",
+          status: "참석",
+          message: "정말 축하해 💕 너희들의 행복한 모습 보니까 나도 덩달아 기뻐진다. 결혼식 당일에 만나자!",
+          password: "1234",
+          date: new Date(Date.now() - 3600000)
+        },
+        {
+          id: 2,
+          name: "이동생",
+          status: "참석",
+          message: "언니 오빠! 드디어 결혼하시는군요! 😍 오랫동안 행복하세요~",
+          password: "1234",
+          date: new Date(Date.now() - 7200000)
+        },
+        {
+          id: 3,
+          name: "박선배",
+          status: "불참",
+          message: "축하드립니다! 아쉽게도 참석하지 못하지만 마음만은 함께하겠습니다. 새로운 시작을 진심으로 축복합니다! 🎉",
+          password: "1234",
+          date: new Date(Date.now() - 86400000)
+        }
+      );
+    }, 1000);
   </script>
 </body>
 </html>

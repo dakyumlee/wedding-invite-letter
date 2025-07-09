@@ -50,11 +50,12 @@
       padding: 40px 30px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       text-align: center;
       backface-visibility: hidden;
       transition: all 0.6s ease;
+      overflow-y: auto;
     }
 
     .card.active {
@@ -228,6 +229,41 @@
       color: #666;
     }
 
+    .guestbook-tabs {
+      display: flex;
+      width: 100%;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f0f0f0;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      background: #f0f0f0;
+      color: #666;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active {
+      background: #666;
+      color: white;
+    }
+
+    .tab-content {
+      width: 100%;
+      min-height: 300px;
+    }
+
+    .tab-content.hidden {
+      display: none;
+    }
+
     .rsvp-form {
       width: 100%;
       display: flex;
@@ -276,6 +312,110 @@
     .rsvp-form button:hover {
       background: #555;
       transform: translateY(-2px);
+    }
+
+    .guestbook-list {
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 10px 0;
+    }
+
+    .guestbook-item {
+      background: #f8f8f8;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      text-align: left;
+      border-left: 4px solid #ddd;
+    }
+
+    .guestbook-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .guestbook-name {
+      font-weight: 600;
+      color: #5a5a5a;
+      font-size: 16px;
+    }
+
+    .guestbook-date {
+      font-size: 12px;
+      color: #999;
+    }
+
+    .guestbook-status {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .guestbook-status.attend {
+      background: #e8f5e8;
+      color: #4a8c4a;
+    }
+
+    .guestbook-status.absent {
+      background: #ffe8e8;
+      color: #c44444;
+    }
+
+    .guestbook-status.maybe {
+      background: #fff3e0;
+      color: #e68900;
+    }
+
+    .guestbook-message {
+      color: #444;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .guestbook-actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .delete-btn {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .delete-btn:hover {
+      background: #ff5252;
+      transform: translateY(-1px);
+    }
+
+    .password-input {
+      width: 120px;
+      padding: 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      font-size: 12px;
+      font-family: 'Noto Serif KR', serif;
+    }
+
+    .password-input:focus {
+      outline: none;
+      border-color: #888;
+    }
+
+    .no-messages {
+      text-align: center;
+      color: #999;
+      font-style: italic;
+      padding: 40px 20px;
     }
 
     .qr-container {
@@ -483,7 +623,7 @@
     </div>
 
     <audio id="bgMusic" loop>
-      <source src="/Users/mac/Desktop/작업/SJ/Gareth Donkin - Falling For You (Official Audio).mp3" type="audio/mpeg">
+      <source src="변진섭 - 숙녀에게   가사 (Lyrics).mp3" type="audio/mpeg">
     </audio>
 
     <div class="card-indicator">
@@ -497,7 +637,7 @@
 
     <div class="card-stack">
       <div class="card active">
-        <h1>박현동 & 박수지</h1>
+        <h1>신랑 & 신부</h1>
         <div class="main-photo">웨딩 사진</div>
         <p>저희 두 사람이 사랑으로 하나 되어<br>결혼합니다</p>
         <p>귀한 걸음 하시어 축복해주시면<br>감사하겠습니다</p>
@@ -509,24 +649,24 @@
       <div class="card">
         <h2>예식 안내</h2>
         <div class="date-info">
-          <h3>2025년 9월 13일 (토)</h3>
-          <h3>오전 11시</h3>
+          <h3>20XX년 X월 XX일 (X)</h3>
+          <h3>오전 XX시</h3>
         </div>
         <div class="location-info">
-          <p><strong>W시티 컨벤션 웨딩</strong></p>
-          <p>별관 7층 하우스가든홀</p>
-          <p style="margin-top: 15px; color: #666;">울산광역시 북구 진장17길 7</p>
+          <p><strong>장소</strong></p>
+          <p>장소 상세</p>
+          <p style="margin-top: 15px; color: #666;">장소 상세2</p>
         </div>
         <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.638349084956!2d129.35368171142778!3d35.56263293636567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3567cdeb50debba7%3A0x10980ca679fc2b13!2zV-yLnO2LsCDsu6jrsqTshZgg7Jeo65Sp7ZmA!5e0!3m2!1sko!2skr!4v1751851963762!5m2!1sko!2skr" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23336243.430112567!2d-68.29893749999998!3d69.08445114999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4e753c9b20485bfd%3A0x4e5f0d379253c31!2z7JWE7YGs7Yux!5e0!3m2!1sko!2skr!4v1752042315807!5m2!1sko!2skr" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
 
       <div class="card">
         <h2>오시는 길</h2>
         <ul class="transport-list">
-          <li><strong>지하철/버스</strong><br>104, 122, 126, 133, 401번<br>진장시장 정류장 하차 후 도보 5분</li>
-          <li><strong>주차안내</strong><br>하우스가든홀 건물 내 지하주차장 이용</li>
+          <li><strong>지하철/버스</strong><br>가는 길1<br>상세1</li>
+          <li><strong>주차안내</strong><br>주차안내2</li>
           <li><a href="https://map.kakao.com/link/to/하우스가든홀,35.56263293636567,129.35368171142778">카카오맵으로 보기</a></li>
           <li><a href="https://naver.me/FnMF3AJm">네이버지도로 보기</a></li>
           <li><a href="tmap://route?goalname=하우스가든홀&goalx=129.35368171142778&goaly=35.56263293636567">티맵으로 길찾기</a></li>
@@ -537,12 +677,12 @@
         <h2>마음 전하실 곳</h2>
         <div class="account-info">
           <div class="account-item">
-            <div class="account-name">신랑 박현동</div>
-            <div class="account-number">우리은행 1002549859637</div>
+            <div class="account-name">신랑 김누구</div>
+            <div class="account-number">은행 어디</div>
           </div>
           <div class="account-item">
-            <div class="account-name">신부 박수지</div>
-            <div class="account-number">저축은행 06601211393753</div>
+            <div class="account-name">신부 최누구</div>
+            <div class="account-number">은행 어디</div>
           </div>
         </div>
         <p style="margin-top: 20px;">
@@ -551,26 +691,42 @@
       </div>
 
       <div class="card">
-        <h2>참석 여부 & 축하 메시지</h2>
-        <form class="rsvp-form">
-          <input type="text" placeholder="이름을 입력해주세요" required>
-          <select required>
-            <option value="">참석 여부를 선택해주세요</option>
-            <option value="참석">참석</option>
-            <option value="불참">불참</option>
-            <option value="미정">미정</option>
-          </select>
-          <textarea placeholder="축하 메시지를 남겨주세요" required></textarea>
-          <input type="password" placeholder="비밀번호 (수정/삭제용)" required>
-          <button type="submit">마음 전하기</button>
-        </form>
+        <h2>방명록</h2>
+        <div class="guestbook-tabs">
+          <button class="tab-btn active" data-tab="write">축하 메시지 작성</button>
+          <button class="tab-btn" data-tab="view">방명록 보기</button>
+        </div>
+        
+        <div class="tab-content" id="writeTab">
+          <form class="rsvp-form" id="guestbookForm">
+            <input type="text" id="guestName" placeholder="이름을 입력해주세요" required>
+            <select id="guestStatus" required>
+              <option value="">참석 여부를 선택해주세요</option>
+              <option value="참석">참석</option>
+              <option value="불참">불참</option>
+              <option value="미정">미정</option>
+            </select>
+            <textarea id="guestMessage" placeholder="축하 메시지를 남겨주세요" required></textarea>
+            <input type="password" id="guestPassword" placeholder="비밀번호 (수정/삭제용)" required>
+            <button type="submit">마음 전하기 💕</button>
+          </form>
+        </div>
+
+        <div class="tab-content hidden" id="viewTab">
+          <div class="guestbook-list" id="guestbookList">
+            <div class="no-messages">
+              아직 작성된 메시지가 없습니다.<br>
+              첫 번째 축하 메시지를 남겨주세요! 💝
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="card">
         <h2>모바일 청첩장</h2>
         <div class="qr-container">
           <div class="qr-code">
-            <img src="suji_wedding_qr.png" alt="청첩장 QR코드">
+            <p>QR code 들어갈 자리</p>
           </div>
           <p>QR코드를 스캔하시면<br>모바일 청첩장을 보실 수 있습니다</p>
           <p style="font-size: 14px; color: #888;">친구들에게 공유해주세요 💕</p>
@@ -584,23 +740,7 @@
     </div>
   </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAbaauVIvPWPT1O_h4kElc0nVkfPaiTbl4",
-      authDomain: "poetic-planet-462812-f5.firebaseapp.com",
-      projectId: "poetic-planet-462812-f5",
-      storageBucket: "poetic-planet-462812-f5.appspot.com",
-      messagingSenderId: "375231510481",
-      appId: "1:375231510481:web:5c06868eac02b01e0352f0",
-      measurementId: "G-EC6J2HWNQ6"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
+  <script>
     const bgMusic = document.getElementById('bgMusic');
     const musicPlayer = document.getElementById('musicPlayer');
     let isPlaying = false;
@@ -706,34 +846,174 @@
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     document.getElementById('dday').textContent = diffDays > 0 ? `D-${diffDays}` : '오늘입니다!';
 
-    const rsvpForm = document.querySelector('.rsvp-form');
-    if (rsvpForm) {
-      rsvpForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const name = rsvpForm.querySelector('input[type="text"]').value;
-        const status = rsvpForm.querySelector('select').value;
-        const message = rsvpForm.querySelector('textarea').value;
-        const password = rsvpForm.querySelector('input[type="password"]').value;
+    let guestbookEntries = [];
 
-        try {
-          await addDoc(collection(db, "rsvps"), {
-            name,
-            status,
-            message,
-            password,
-            createdAt: serverTimestamp()
-          });
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
 
-          alert("마음이 전달되었습니다! 감사합니다 💕");
-          rsvpForm.reset();
-        } catch (error) {
-          console.error("Error:", error);
-          alert("전송 중 오류가 발생했습니다. 다시 시도해주세요.");
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.dataset.tab;
+        
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        tabContents.forEach(content => {
+          content.classList.add('hidden');
+        });
+        
+        if (targetTab === 'write') {
+          document.getElementById('writeTab').classList.remove('hidden');
+        } else if (targetTab === 'view') {
+          document.getElementById('viewTab').classList.remove('hidden');
+          displayGuestbookEntries();
         }
+      });
+    });
+
+    const guestbookForm = document.getElementById('guestbookForm');
+    guestbookForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('guestName').value;
+      const status = document.getElementById('guestStatus').value;
+      const message = document.getElementById('guestMessage').value;
+      const password = document.getElementById('guestPassword').value;
+      
+      const entry = {
+        id: Date.now(),
+        name,
+        status,
+        message,
+        password,
+        date: new Date()
+      };
+      
+      guestbookEntries.unshift(entry);
+      
+      alert("소중한 마음이 전달되었습니다! 감사합니다 💕");
+      guestbookForm.reset();
+      
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabBtns[1].classList.add('active');
+      document.getElementById('writeTab').classList.add('hidden');
+      document.getElementById('viewTab').classList.remove('hidden');
+      displayGuestbookEntries();
+    });
+
+    function displayGuestbookEntries() {
+      const listContainer = document.getElementById('guestbookList');
+      
+      if (guestbookEntries.length === 0) {
+        listContainer.innerHTML = `
+          <div class="no-messages">
+            아직 작성된 메시지가 없습니다.<br>
+            첫 번째 축하 메시지를 남겨주세요! 💝
+          </div>
+        `;
+        return;
+      }
+      
+      listContainer.innerHTML = guestbookEntries.map(entry => {
+        const statusClass = entry.status === '참석' ? 'attend' : 
+                           entry.status === '불참' ? 'absent' : 'maybe';
+        
+        return `
+          <div class="guestbook-item" data-entry-id="${entry.id}">
+            <div class="guestbook-header">
+              <div class="guestbook-name">${entry.name}</div>
+              <div>
+                <span class="guestbook-status ${statusClass}">${entry.status}</span>
+                <div class="guestbook-date">${formatDate(entry.date)}</div>
+              </div>
+            </div>
+            <div class="guestbook-message">${entry.message.replace(/\n/g, '<br>')}</div>
+            <div class="guestbook-actions">
+              <input type="password" class="password-input" placeholder="비밀번호" data-entry-id="${entry.id}">
+              <button class="delete-btn" onclick="deleteEntry(${entry.id})">삭제</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function deleteEntry(entryId) {
+      const passwordInput = document.querySelector(`input[data-entry-id="${entryId}"]`);
+      const enteredPassword = passwordInput.value;
+      
+      if (!enteredPassword) {
+        alert('비밀번호를 입력해주세요.');
+        return;
+      }
+      
+      const entry = guestbookEntries.find(e => e.id === entryId);
+      
+      if (!entry) {
+        alert('메시지를 찾을 수 없습니다.');
+        return;
+      }
+      
+      if (entry.password !== enteredPassword) {
+        alert('비밀번호가 일치하지 않습니다.');
+        passwordInput.value = '';
+        return;
+      }
+      
+      if (confirm('정말로 이 메시지를 삭제하시겠습니까?')) {
+        guestbookEntries = guestbookEntries.filter(e => e.id !== entryId);
+        displayGuestbookEntries();
+        alert('메시지가 삭제되었습니다.');
+      }
+    }
+
+    function formatDate(date) {
+      const now = new Date();
+      const diff = now - date;
+      const minutes = Math.floor(diff / 60000);
+      const hours = Math.floor(diff / 3600000);
+      const days = Math.floor(diff / 86400000);
+      
+      if (minutes < 1) return '방금 전';
+      if (minutes < 60) return `${minutes}분 전`;
+      if (hours < 24) return `${hours}시간 전`;
+      if (days < 7) return `${days}일 전`;
+      
+      return date.toLocaleDateString('ko-KR', { 
+        month: 'short', 
+        day: 'numeric' 
       });
     }
 
     updateCards();
+    
+    setTimeout(() => {
+      guestbookEntries.push(
+        {
+          id: 1,
+          name: "김친구",
+          status: "참석",
+          message: "정말 축하해 💕 너희들의 행복한 모습 보니까 나도 덩달아 기뻐진다. 결혼식 당일에 만나자!",
+          password: "1234",
+          date: new Date(Date.now() - 3600000)
+        },
+        {
+          id: 2,
+          name: "이동생",
+          status: "참석",
+          message: "언니 오빠! 드디어 결혼하시는군요! 😍 오랫동안 행복하세요~",
+          password: "1234",
+          date: new Date(Date.now() - 7200000)
+        },
+        {
+          id: 3,
+          name: "박선배",
+          status: "불참",
+          message: "축하드립니다! 아쉽게도 참석하지 못하지만 마음만은 함께하겠습니다. 새로운 시작을 진심으로 축복합니다! 🎉",
+          password: "1234",
+          date: new Date(Date.now() - 86400000)
+        }
+      );
+    }, 1000);
   </script>
 </body>
 </html>
